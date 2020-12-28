@@ -13,7 +13,7 @@ const getDate = (date, time) => {
 
     // new Date(year, month, date, hours, minutes, seconds, ms)
     const res =  new Date(...dateArr, ...timeArr);
-    console.log(res);
+    // console.log(res);
     return res;
 }
 

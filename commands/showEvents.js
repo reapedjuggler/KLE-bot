@@ -43,7 +43,7 @@ module.exports = {
                 await Event.find()
                 .sort('date')
                 .then(response => {
-                    console.log(response);
+                    // console.log(response);
 
                     const events = compute(response);
                     
