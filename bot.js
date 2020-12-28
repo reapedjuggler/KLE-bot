@@ -1,10 +1,6 @@
 require('dotenv').config();
 
-const fs = require('fs');
-
 const Discord = require('discord.js');
-
-// const test = require('./models/test.js');
 
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
@@ -16,7 +12,6 @@ let commandFiles = [];
 bot.on('ready', async () => {
     console.log('The KLE bot is online!');
 
-    // test();
     await getFiles('./commands')
     .then(files => {
         // console.log(files);
@@ -25,17 +20,10 @@ bot.on('ready', async () => {
         {
             let filePath = String(file);
             filePath = './' + filePath.substring(filePath.lastIndexOf('commands\\'));
-            
-            for(let char of filePath)
-            {
-                if(char === '\\')
-                    char = '/';
-            }
-
             commandFiles.push(filePath);
         }
 
-        console.log(commandFiles);
+        // console.log(commandFiles);
 
         for (const filePath of commandFiles) {
             const command = require(filePath);

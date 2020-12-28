@@ -1,8 +1,5 @@
-const fs = require('fs');
-
 const Discord = require('discord.js');
-
-const getFiles = require('../getFiles');
+const getFiles = require('../../getFiles');
 
 module.exports = {
     name: '!help',
@@ -17,18 +14,11 @@ module.exports = {
             for(let file of files)
             {
                 let filePath = String(file);
-                filePath = '../' + filePath.substring(filePath.lastIndexOf('commands\\'));
-                
-                for(let char of filePath)
-                {
-                    if(char === '\\')
-                        char = '/';
-                }
-
+                filePath = '../../' + filePath.substring(filePath.lastIndexOf('commands\\'));
                 commandFiles.push(filePath);
             }
 
-            console.log("in help", commandFiles);
+            // console.log("in help", commandFiles);
         })
         .catch(err => console.log(err))
 
