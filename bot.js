@@ -1,9 +1,10 @@
 require('dotenv').config();
 
 const fs = require('fs');
-const mongo = require('./mongo');
 
 const Discord = require('discord.js');
+
+// const test = require('./models/test.js');
 
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
@@ -17,13 +18,7 @@ for (const file of commandFiles) {
 bot.on('ready', async () => {
     console.log('The KLE bot is online!');
 
-    await mongo().then(mongoose => {
-        try {
-            console.log("connected to mongo!");
-        } finally {
-            mongoose.connection.close();
-        }
-    })
+    // test();
 })
 
 bot.on('message', message => {
