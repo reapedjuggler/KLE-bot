@@ -2,29 +2,54 @@ const fs = require('fs');
 
 const Discord = require('discord.js');
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
-let commands = [];
-for (const file of commandFiles) {
-
-    if(`${file}` === 'invalid.js')
-        continue;
-    
-    if(`${file}` === 'help.js')
-    {
-        commands.push({name: '!help', value: 'List available commands', inline: false});
-        continue;
-    }
-
-    const command = require(`./${file}`);
-    commands.push({name: command.name, value: command.description, inline: false});
-}
+const getFiles = require('../getFiles');
 
 module.exports = {
     name: '!help',
     description: 'List available commands',
-    execute(message, args) {
-        
+    execute: async (message, args) => {
+
+        let commandFiles = [];
+        await getFiles('./commands')
+        .then(files => {
+            // console.log(files);
+
+            for(let file of files)
+            {
+                let filePath = String(file);
+                filePath = '../' + filePath.substring(filePath.lastIndexOf('commands\\'));
+                
+                for(let char of filePath)
+                {
+                    if(char === '\\')
+                        char = '/';
+                }
+
+                commandFiles.push(filePath);
+            }
+
+            console.log("in help", commandFiles);
+        })
+        .catch(err => console.log(err))
+
+        let commands = [];
+        for (let filePath of commandFiles) {
+
+            const fileName = filePath.substring(filePath.lastIndexOf('\\') + 1);
+
+            if(fileName === 'invalid.js')
+                continue;
+            
+            if(fileName === 'help.js')
+            {
+                commands.push({name: '!help', value: 'List available commands', inline: false});
+                continue;
+            }
+
+            const command = require(filePath);
+            commands.push({name: command.name, value: command.description, inline: false});
+        }
+    
         const commandEmbedded = new Discord.MessageEmbed()
             .setTitle('Available commands')
             .addFields(commands)

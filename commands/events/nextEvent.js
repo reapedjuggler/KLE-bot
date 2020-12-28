@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
-const mongo = require('../mongo');
+const mongo = require('../../mongo');
 
-const Event = require('../models/event.model')
+const Event = require('../../models/event.model')
 
 const getDateAndTime = (dateObj) => {
     dateObj = dateObj.toString();

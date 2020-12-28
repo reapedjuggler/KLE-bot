@@ -1,6 +1,6 @@
-const mongo = require('../mongo');
+const mongo = require('../../mongo');
 
-const Event = require('../models/event.model')
+const Event = require('../../models/event.model')
 
 module.exports = {
     name: '!deletevent',

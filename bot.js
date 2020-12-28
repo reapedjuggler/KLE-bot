@@ -8,17 +8,41 @@ const Discord = require('discord.js');
 
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
-    bot.commands.set(command.name, command);
-}
+const getFiles = require('./getFiles');
+
+let commandFiles = [];
 
 bot.on('ready', async () => {
     console.log('The KLE bot is online!');
 
     // test();
+    await getFiles('./commands')
+    .then(files => {
+        // console.log(files);
+
+        for(let file of files)
+        {
+            let filePath = String(file);
+            filePath = './' + filePath.substring(filePath.lastIndexOf('commands\\'));
+            
+            for(let char of filePath)
+            {
+                if(char === '\\')
+                    char = '/';
+            }
+
+            commandFiles.push(filePath);
+        }
+
+        console.log(commandFiles);
+
+        for (const filePath of commandFiles) {
+            const command = require(filePath);
+            bot.commands.set(command.name, command);
+        }
+    })
+    .catch(err => console.log(err))
 })
 
 bot.on('message', message => {
