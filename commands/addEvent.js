@@ -1,5 +1,3 @@
-const Discord = require('discord.js');
-const mongoose = require('mongoose');
 const mongo = require('../mongo');
 
 const Event = require('../models/event.model')
@@ -85,11 +83,11 @@ module.exports = {
             
                 await event.save()
                     .then(doc => {
-                        str = "Event Successfully Added! 😀";
+                        str = 'Event Successfully Added! 😀';
                         console.log(doc);
                     })
                     .catch(err => {
-                        str = "There was some error. 🙁";
+                        str = 'There was some error. 🙁';
                         console.log(err);
                     })
             } finally {
