@@ -39,7 +39,9 @@ module.exports = {
 
         await mongo().then(async mongoose => {
             try {
+
                 await Event.find()
+                .sort('date')
                 .then(response => {
                     console.log(response);
 
