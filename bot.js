@@ -1,5 +1,3 @@
-// console.log("Hello world");
-
 require('dotenv').config();
 
 const Discord = require('discord.js');
@@ -11,7 +9,6 @@ bot.on('ready', () => {
 })
 
 bot.on('message', message => {
-    // console.log(message);
 
     if(message.content === "Hi KLE!")
         message.reply(`Hello!`);
