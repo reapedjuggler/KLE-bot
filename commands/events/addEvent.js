@@ -9,11 +9,8 @@ const getDate = (date, time) => {
     dateArr.reverse();
     const timeArr = time.split(':');
 
-    // console.log(dateArr, timeArr);
-
     // new Date(year, month, date, hours, minutes, seconds, ms)
     const res =  new Date(...dateArr, ...timeArr);
-    // console.log(res);
     return res;
 }
 
