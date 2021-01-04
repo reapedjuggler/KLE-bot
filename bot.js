@@ -5,6 +5,23 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 
+
+// Greet a new user
+bot.on('guildMemberAdd', member => {
+
+    const channel = member.guild.channels.cache.find(ch => ch.name === 'general');
+
+    if (!channel) return;
+
+    let name = member.user.username
+    let welcomeEmbed = new Discord.MessageEmbed()
+        .setColor('#176ffc')
+        .setTitle(`Yay! ${name} you made it to KPH discord Server `)
+        .setDescription(`I am your friendly bot written in Javascript, Feel free to tell us more about yourself.`)
+        .setFooter('Use !help command to know more about me ')
+    channel.send(welcomeEmbed)
+})
+
 const getFiles = require('./getFiles');
 
 let commandFiles = [];
