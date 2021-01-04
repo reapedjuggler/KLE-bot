@@ -36,7 +36,9 @@ The purpose of this bot is to automate various tasks of the Hub and at the same 
 -   Make a pull request.
 -   After code review, your PR may or may not be merged depending on your changes.
 
-## Opening an Issue
+```
+$ git clone https://github.com/Knuth-Programming-Hub/KLE-bot.git
+```
 
 Open an issue [here](https://github.com/Knuth-Programming-Hub/KLE-bot/issues) to...
 
